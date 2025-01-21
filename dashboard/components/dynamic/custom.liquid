@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% render 'partials/header.liquid', client: client, user: user %}
+</head>
+
+<body class="bg-primary-100 font-body">
+    {% render 'partials/navbar.liquid', client: client, user: user, admin: admin %}
+    <div
+        class="m-20 p-7 md:w-8/12 w-11/12 bg-primary-200 mx-auto rounded-md shadow-lg shadow-primary-700 border-2 border-primary-300">
+        <p class="text-5xl font-bold text-center text-white">{{ status }}</p>
+        <br /><br />
+        <p class="text-xl text-center font-semibold text-white">{{ message }}</p>
+        {% if product %}
+        <br />
+        <div class="rounded-lg bg-primary-400 shadow-lg py-5 px-6 text-lg">
+            <code class="text-white">{{ code }}</code>
+        </div>
+        {% endif %}
+    </div>
+    <footer>
+        <script src="/public/scripts/tailwind.config.js"></script>
+        <p class="text-white text-base font-semibold text-center p-5">{{ client.config.name }} ©️ 2022 - 2023</p>
+    </footer>
+</body>
+
+</html>

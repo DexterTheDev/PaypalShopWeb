@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% render 'partials/header.liquid', client: client, user: user %}
+</head>
+
+<body class="bg-primary-100 font-body ">
+    {% render 'partials/navbar.liquid', client: client, user: user, admin: admin %}
+    <div class="md:w-8/12 w-11/12 mx-auto mt-10">
+        <p class=" font-bold text-3xl">{{ client.config.name }} Subscriptions Products:</p>
+        <p class="text-gray-500 font-bold text-sm">Monthly automated payments</p>
+        <div class="flex flex-wrap my-10 md:ml-5 md:ml-0">
+            {% for product in products %}
+                <script>console.log('{{product.name}}');</script>
+            <div id="{{ product.id }}"
+                class="mr-7 mb-4 lg:w-80 w-auto rounded-2xl bg-primary-400 h-98 hover:scale-110 duration-100 bg-blend-overlay hover:bg-origin-padding bg-center bg-cover bg-no-repeat bg-[url('{{ product.image }}')]">
+                <a class="bg-primary-700 m-2 text-white float-right font-bold text-center rounded-full p-1 px-3">${{
+                    product.price
+                    }}</a>
+                <div class="p-5">
+                    <p class="text-white text-3xl truncate mt-7">{{ product.name }}</p>
+                    <p class="text-white text-base h-48 overflow-auto mt-5">
+                        {{ product.description }}
+                    </p>
+                    <div class="flex mt-5 ">
+                        <form>
+                            <input id="email"
+                                class="mb-5 justify-center outline-none text-center rounded-full bg-primary-300 font-bold text-base py-2 w-full hover:bg-primary-700 duration-100"
+                                placeholder="Email">
+                            <a onclick="buy('{{ product.id }}')"
+                                class="cursor-pointer justify-center text-center px-7 rounded-full bg-primary-300 font-bold text-base py-2 w-full hover:bg-primary-700 duration-100"><i
+                                    class="fa-solid fa-arrow-right"></i></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p class="text-black text-center font-semibold text-xl">Nothing to see here....</p>
+            {% endfor %}
+        </div>
+
+    </div>
+    <footer>
+        <script src="/public/scripts/tailwind.config.js"></script>
+        <script src="/public/scripts/productsubscribe.js"></script>
+        <p class=" text-base font-semibold text-center p-5">{{ client.config.name }} ©️ 2022 - 2023</p>
+    </footer>
+</body>
+
+</html>

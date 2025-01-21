@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% render 'partials/header.liquid', client: client, user: user %}
+</head>
+
+<body class="bg-primary-100 font-body ">
+    {% render 'partials/navbar.liquid', client: client, user: user, admin: admin %}
+    <div class="md:w-8/12 mx-auto mt-10">
+        <a href="/products/create"
+            class="ml-5 md:ml-0 text-white rounded-full bg-primary-400 font-bold text-xl py-3 px-7 hover:bg-primary-600 duration-100">Create
+            Resource&nbsp;<i class="fa-solid fa-plus"></i></a>
+        <a href="/products/subscription/create"
+            class="ml-5 md:ml-0 text-white rounded-full bg-primary-400 font-bold text-xl py-3 px-7 hover:bg-primary-600 duration-100">Create
+            Subscription Resource&nbsp;<i class="fa-solid fa-plus"></i></a>
+        <div class="flex flex-wrap mx-auto my-10 ml-5 md:ml-0">
+            {% for product in products %}
+            <div id="{{ product.id }}"
+                class="mr-7 mb-4 lg:w-80 w-auto rounded-2xl bg-primary-400 h-98 hover:scale-110 duration-100 bg-blend-overlay hover:bg-origin-padding bg-center bg-cover bg-no-repeat bg-[url('{{ product.image }}')]">
+                <a class="bg-primary-700 m-2 text-white float-right font-bold text-center rounded-full p-1 px-3">${{
+                    product.price }}</a>
+                <div class="p-5">
+                    <p class="text-white text-3xl truncate mt-7">{{ product.name }}</p>
+                    {% if product.subscription %}<p class="text-xl text-yellow-600 truncate m3-7">Subscription
+                        product </p>
+                    {% endif %}
+                    <p class="text-white text-base h-48 overflow-auto mt-5">
+                        {{ product.description }}
+                    </p>
+                    <div class="flex mt-5">
+                        <a onclick="preview()"
+                            class="text-white cursor-pointer justify-center text-center px-20  rounded-full bg-primary-200 font-bold text-base py-2 w-full hover:bg-primary-700 duration-100">Buy
+                            now&nbsp;<i class="fa-solid fa-hand-back-point-up"></i></a>
+                    </div>
+                    <div class="flex mt-5">
+                        <a onclick="deleteproduct('{{ product.id }}')"
+                            class="text-white mr-2 cursor-pointer justify-center text-center px-10  rounded-full bg-red-500 font-bold text-base py-2 w-full hover:bg-red-700 duration-100">Delete&nbsp;<i
+                                class="fa-solid fa-hand-back-point-up"></i></a>
+                        <a href="/products/{{ product.id }}/edit"
+                            class="text-white cursor-pointer justify-center text-center px-10  rounded-full bg-primary-200 font-bold text-base py-2 w-full hover:bg-primary-700 duration-100">Edit&nbsp;<i
+                                class="fa-solid fa-hand-back-point-up"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p class="text-black text-center font-semibold text-xl">Nothing to see here....</p>
+            {% endfor %}
+        </div>
+        <div class="lg:block border-b border-primary-500 mx-auto md:w-5/12 w-11/12 mt-14 mb-5"></div>
+        <div class="mx-auto mt-10 justify-end">
+            <h1 class="text-3xl"><i class="fa fa-flag"></i>&nbsp;Payments Logs</h1>
+        </div>
+        <div class="flex flex-col mx-auto">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8 rounded-lg">
+                    <div class="overflow-hidden">
+                        <table class="min-w-full text-center">
+                            <thead class="border-b bg-primary-300">
+                                <tr>
+                                    <th scope="col" class="text-sm font-bold text-left text-white px-6 py-4">
+                                        Payment ID
+                                    </th>
+                                    <th scope="col" class="text-sm font-bold text-left text-white px-6 py-4">
+                                        Product
+                                    </th>
+                                    <th scope="col" class="text-sm font-bold text-left text-white px-6 py-4">
+                                        Code
+                                    </th>
+                                    <th scope="col" class="text-sm font-bold text-left text-white px-6 py-4">
+                                        Email
+                                    </th>
+                                </tr>
+                            </thead class="border-b">
+                            <tbody class="bg-primary-500">
+                                {% for product in logs %}
+                                <tr class="cursor-pointer bg-white border-b duration-300 hover:bg-secondary-700">
+                                    <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap text-left">
+                                        {{ product.id }}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap text-left">
+                                        {{ product.product }}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap text-left">
+                                        {{ product.code }}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap text-left">
+                                        {{ product.email }}
+                                    </td>
+                                </tr class="bg-primary-300 border-b">
+                                {% else %}
+                                <tr
+                                    class="cursor-pointer bg-white border-b text-center flex duration-300 hover:bg-secondary-700">
+                                    <td class="text-black font-semibold text-xl py-4 px-4">Nothing to see here....</td>
+                                </tr class="bg-primary-300 border-b">
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <script src="/public/scripts/tailwind.config.js"></script>
+        <script src="/public/scripts/panel.js"></script>
+        <p class=" text-base font-semibold text-center p-5">{{ client.config.name }} ©️ 2022 - 2023</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% render 'partials/header.liquid', client: client, user: user, admin: admin %}
+</head>
+
+<body class="bg-primary-100 font-body">
+    {% render 'partials/navbar.liquid', client: client, user: user, admin: admin %}
+    <div class="md:flex mt-20 mb-10 pt-10 w-8/12 mx-auto items-center">
+        <img src="{{ avatar }}" class="md:mx-0 w-44 rounded-full shadow-lg shadow-black-200 mx-auto" />
+        <div>
+            <p class="md:text-left text-5xl font-semibold pl-5 text-center">{{ user.username }}</p>
+            <p class="md:text-left text-xl font-semibold pl-5 text-center">{{ userdb.email }}</p>
+        </div>
+    </div>
+    <div class="lg:block lg:mt-0 border-b border-primary-200 mx-auto md:w-5/12 w-8/12 mt-5"></div>
+    <div class="md:w-8/12 mx-auto mt-10 justify-end">
+        <h1 class="text-3xl"><i class="fa fa-flag"></i>&nbsp;Payments</h1>
+    </div>
+    <div class="flex flex-col md:w-8/12 mx-auto">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8 rounded-lg">
+                <div class="overflow-hidden">
+                    <table class="min-w-full text-center">
+                        <thead class="border-b bg-primary-300">
+                            <tr>
+                                <th scope="col" class="text-sm font-bold text-left text-white px-6 py-4">
+                                    Payment ID
+                                </th>
+                                <th scope="col" class="text-sm font-bold text-left text-white px-6 py-4">
+                                    Product
+                                </th>
+                                <th scope="col" class="text-sm font-bold text-left text-white px-6 py-4">
+                                    Code
+                                </th>
+                                <th scope="col" class="text-sm font-bold text-left text-white px-6 py-4">
+                                    Subscription
+                                </th>
+                            </tr>
+                        </thead class="border-b">
+                        <tbody class="bg-primary-500">
+                            {% for product in userdb.products %}
+                            <tr class="cursor-pointer bg-white border-b duration-300 hover:bg-secondary-700">
+                                <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap text-left">
+                                    {{ product.id }}
+                                </td>
+                                <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap text-left">
+                                    {{ product.product }}
+                                </td>
+                                <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap text-left">
+                                    {{ product.code }}
+                                </td>
+                                <td class="text-sm text-gray-900 font-bold px-6 py-4 whitespace-nowrap text-left">
+                                    {{ product.subscribed }}
+                                </td>
+                            </tr class="bg-primary-300 border-b">
+                            {% else %}
+                            <tr
+                                class="cursor-pointer bg-white border-b text-center flex duration-300 hover:bg-secondary-700">
+                                <td class="text-black font-semibold text-xl py-4 px-4">Nothing to see here....</td>
+                            </tr class="bg-primary-300 border-b">
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <script src="/public/scripts/tailwind.config.js"></script>
+        <p class="text-base font-semibold text-center p-5">{{ client.config.name }} ©️ 2022 - 2023</p>
+    </footer>
+</body>
+
+</html>

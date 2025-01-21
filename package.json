@@ -1,0 +1,28 @@
+{
+  "name": "productselling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@fastify/formbody": "^7.0.1",
+    "@fastify/oauth2": "^5.0.0",
+    "@fastify/secure-session": "^5.2.0",
+    "@fastify/static": "^6.4.0",
+    "@fastify/view": "^7.0.0",
+    "axios": "^0.27.2",
+    "discord.js": "^13.8.0",
+    "fastify": "^4.0.2",
+    "fs": "^0.0.1-security",
+    "liquidjs": "^9.37.0",
+    "mongoose": "^6.3.8",
+    "path": "^0.12.7",
+    "paypal-rest-sdk": "^1.8.1",
+    "url": "^0.11.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "author": "Dexter",
+  "license": "MIT"
+}

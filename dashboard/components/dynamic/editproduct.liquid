@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% render 'partials/header.liquid', client: client, user: user %}
+</head>
+
+<body class="bg-primary-100 font-body text-white">
+    {% render 'partials/navbar.liquid', client: client, user: user, admin: admin %}
+    <div class="md:w-8/12 mx-2 md:mx-auto mt-5">
+        <div class="bg-primary-400 rounded w-auto h-auto p-4 border-primary-500 border-2 border-dashed">
+            <div class="mb-6">
+                <p class="text-white font-bold text-3xl text-center">Edit {{ product.name }} Resource</p>
+                <div class="lg:block lg:mt-0 border-b border-primary-500 mx-auto md:w-5/12 w-11/12 mt-7 mb-2"></div>
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Product
+                    name</label>
+                <input id="name" maxlength="30"
+                    class="text-white bg-primary-700 border-2 border-primary-100 focus:border-primary-500 duration-200 outline-none rounded w-full h-10 px-2 mb-3"
+                    placeholder="Placeholder" value="{{ product.name }}" />
+                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price</label>
+                <input id="price" type="number"
+                    class="text-white bg-primary-700 border-2 border-primary-100 focus:border-primary-500 duration-200 outline-none rounded w-full h-10 px-2 mb-3"
+                    placeholder="9.99" value="{{ product.price }}" />
+                <label for="description"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Description</label>
+                <textarea id="description" maxlength="400"
+                    class="text-white bg-primary-700 border-2 border-primary-100 focus:border-primary-500 duration-200 outline-none rounded w-full h-40 p-3 mb-3"
+                    placeholder="Product Description">{{ product.description }}</textarea>
+                <label for="url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Product
+                    Url</label>
+                <input id="url"
+                    class="text-white bg-primary-700 border-2 border-primary-100 focus:border-primary-500 duration-200 outline-none rounded w-full h-10 px-2 mb-3"
+                    placeholder="Product url to get code from" value="{{ product.url }}" />
+                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Background
+                    Image URL</label>
+                <input id="image" type="url"
+                    class="text-white bg-primary-700 border-2 border-primary-100 focus:border-primary-500 duration-200 outline-none rounded w-full h-10 px-2 mb-3"
+                    placeholder="Image URL" value="{{ product.image }}" />
+                <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Product
+                    RoleID</label>
+                <input id="role"
+                    class="text-white bg-primary-700 border-2 border-primary-100 focus:border-primary-500 duration-200 outline-none rounded w-full h-10 px-2 mb-8"
+                    placeholder="Role id they get after the purchase" value="{{ product.role }}" />
+                <a onclick="submitproduct('edit', '/{{ product.id }}')"
+                    class="ml-5 md:ml-0 text-white rounded bg-primary-500 border-2 border-primary-100 font-bold text-xl py-3 px-7 hover:bg-primary-500 duration-100 cursor-pointer">Modify
+                    changes&nbsp;<i class="fa-solid fa-plus"></i></a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <script src="/public/scripts/tailwind.config.js"></script>
+        <script src="/public/scripts/products.js"></script>
+        <p class="text-white text-base font-semibold text-center p-5">{{ client.config.name }} ©️ 2022 - 2023</p>
+    </footer>
+</body>
+
+</html>
